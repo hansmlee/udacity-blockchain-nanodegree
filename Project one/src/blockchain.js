@@ -113,10 +113,12 @@ class Blockchain {
             let currentTime = parseInt(new Date().getTime().toString().slice(0, -3));
             if((currentTime-messageTime) > 300){
                 reject(new Error('More Than Five Minutes'));
-            }
+                return;
+            };
             if(!bitcoinMessage.verify(message, address, signature)){
                 reject(new Error('Invalid Message'));
-            }
+                return;
+            };
             let data = {address: address, message: message, signature: signature, star: star};
             let block = new BlockClass.Block(data)
             await self._addBlock(block)
@@ -164,13 +166,18 @@ class Blockchain {
         let self = this;
         let stars = [];
         return new Promise((resolve, reject) => {
-            let ownedBlocks = self.chain.filter(block=>block.owner===aaddress);
-            if(ownedBlocks.length === 0) reject(new Error('Address not found.'));
-            stars = ownedBlocks.map(block=>JSON.parse(hex2ascii(block.body)));
+            let ownedBlocks = self.chain.filter(block=>block.owner===address);
+            if(ownedBlocks.length === 0) {
+                reject(new Error('Address not found.'));
+                return;
+            }
+            stars.push(ownedBlocks.getBData());
             stars ? resolve(stars):reject(new Error('Failed to return stars'));
             
         });
     }
+    
+
 
     /**
      * This method will return a Promise that will resolve with the list of errors when validating the chain.
