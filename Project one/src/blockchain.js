@@ -166,13 +166,14 @@ class Blockchain {
         let self = this;
         let stars = [];
         return new Promise((resolve, reject) => {
-            let ownedBlocks = self.chain.filter(block=>block.owner===address);
-            if(ownedBlocks.length === 0) {
-                reject(new Error('Address not found.'));
-                return;
+            let blockDecoded = await block.getBData();
+            if(blockDecoded.owner === address){
+                stars.push(blockDecoded);
             }
-            stars.push(ownedBlocks.getBData());
-            stars ? resolve(stars):reject(new Error('Failed to return stars'));
+            else {
+                reject(new Error('Address not found.'));
+            }
+            resolve(stars);
             
         });
     }
