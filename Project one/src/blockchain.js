@@ -166,8 +166,9 @@ class Blockchain {
         let self = this;
         let stars = [];
         return new Promise((resolve, reject) => {
+        self.chain.forEach(async(block) => {
             let blockDecoded = await block.getBData();
-            if(blockDecoded.owner === address){
+            if(blockDecoded.address === address){
                 stars.push(blockDecoded);
             }
             else {
@@ -176,7 +177,8 @@ class Blockchain {
             resolve(stars);
             
         });
-    }
+    })
+}
     
 
 
@@ -186,7 +188,7 @@ class Blockchain {
      * 1. You should validate each block using `validateBlock`
      * 2. Each Block should check the with the previousBlockHash
      */
-    validateChain() {
+    validateChain(){
         let self = this;
         let errorLog = [];
         return new Promise(async (resolve, reject) => {
@@ -205,9 +207,9 @@ class Blockchain {
     errorLog.length > 0 ? resolve(errorLog):resolve('No error')
     }
 
-})
+})}
 
 }
-}
+
 
 module.exports.Blockchain = Blockchain;   
