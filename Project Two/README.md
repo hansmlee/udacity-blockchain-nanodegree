@@ -3,7 +3,7 @@
 
 ### Submission Information
 
-ERC-721 Token Name: Star Token
+ERC-721 Token Name: Amazing North Star
 
 ERC-721 Token Symbol: STK
 
