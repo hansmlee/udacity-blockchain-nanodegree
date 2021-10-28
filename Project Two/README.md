@@ -5,7 +5,7 @@
 
 ERC-721 Token Name: Amazing North Star
 
-ERC-721 Token Symbol: STK
+ERC-721 Token Symbol: ANS
 
 Version of the Truffle and OpenZeppelin used: Truffle v5.1.44 (core: 5.1.44) | OpenZeppelin version 2.1.2
 
